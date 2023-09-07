@@ -18,6 +18,8 @@ extension MonkeyKing {
         shared.deliverCompletionHandler = nil
         shared.openSchemeCompletionHandler = nil
 
+        let productName = shared.productName ?? ""
+        
         switch account {
         case .alipay(let appID):
 
@@ -26,7 +28,7 @@ extension MonkeyKing {
                 return
             }
 
-            let appUrlScheme = "apoauth" + appID
+            let appUrlScheme = "apoauth" + appID + productName
             let resultDic: [String: String] = ["fromAppUrlScheme": appUrlScheme, "requestType": "SafePay", "dataString": dataStr]
 
             guard var resultStr = resultDic.toString else {

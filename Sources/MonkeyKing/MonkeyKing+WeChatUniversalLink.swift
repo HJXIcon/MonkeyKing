@@ -38,7 +38,7 @@ extension MonkeyKing {
                 kSecMatchLimit as String: kSecMatchLimitOne,
                 kSecReturnData as String: true,
                 kSecReturnAttributes as String: true
-            ] as CFDictionary
+            ] as [String : Any] as CFDictionary
 
             var queryResult: AnyObject?
             let status = withUnsafeMutablePointer(to: &queryResult) {

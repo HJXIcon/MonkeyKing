@@ -15,6 +15,9 @@ public class MonkeyKing: NSObject {
     public typealias PayCompletionHandler = (Result<Void, Error>) -> Void
 
     static let shared = MonkeyKing()
+    
+    /// 产品名
+    private(set) var productName: String?
 
     var webView: WKWebView?
 
@@ -125,7 +128,8 @@ public class MonkeyKing: NSObject {
         }
     }
 
-    public class func registerAccount(_ account: Account) {
+    public class func registerAccount(_ account: Account, productName: String? = nil) {
+        shared.productName = productName
         guard account.platform.isAppInstalled || account.platform.canWebOAuth else { return }
 
         for oldAccount in MonkeyKing.shared.accountSet {

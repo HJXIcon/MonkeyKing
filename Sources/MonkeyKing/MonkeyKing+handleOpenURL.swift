@@ -445,7 +445,8 @@ extension MonkeyKing {
 
         // Alipay
         let account = shared.accountSet[.alipay]
-        if let appID = account?.appID, urlScheme == "ap" + appID || urlScheme == "apoauth" + appID {
+        let productName = shared.productName ?? ""
+        if let appID = account?.appID, urlScheme == "ap" + appID || urlScheme == "apoauth" + appID + productName {
             let urlString = url.absoluteString
             if urlString.contains("//safepay/?") {
 
@@ -467,7 +468,7 @@ extension MonkeyKing {
                     return false
                 }
 
-                if urlScheme == "apoauth" + appID { // OAuth
+                if urlScheme == "apoauth" + appID + productName { // OAuth
                     let resultStr = memo["result"] as? String ?? ""
                     let urlStr = "https://www.example.com?" + resultStr
                     let resultDic = URL(string: urlStr)?.monkeyking_queryDictionary ?? [:]
